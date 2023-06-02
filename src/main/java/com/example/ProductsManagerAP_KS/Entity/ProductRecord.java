@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public record ProductRecord(
         int id, //ID
-        int productId, //商品ID
+        String productId, //商品ID
         int categoryId, //カテゴリーID
         String name, //商品名
         int price, //値段

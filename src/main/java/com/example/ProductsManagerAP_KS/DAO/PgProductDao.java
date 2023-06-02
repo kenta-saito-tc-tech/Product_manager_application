@@ -40,6 +40,8 @@ public class PgProductDao implements ProductDao{
                 new DataClassRowMapper<>(CategoryRecord.class));
     }
 
+
+
     /**
      * categoryテーブルを更新
      * @param categoryRecord
@@ -112,6 +114,34 @@ public class PgProductDao implements ProductDao{
     public List<ListRecord> findAll() {
         return jdbcTemplate.query("SELECT p.id, p.product_id, p.name, p.price, c.name category_name FROM products p INNER JOIN categories c ON p.category_id = c.id ORDER BY p.id",
                 new DataClassRowMapper<>(ListRecord.class));
+    }
+
+    /**
+     * ,並び替え用のmenuのlistの表示用データ取得
+     * @return
+     */
+    public List<ListRecord> productSort(String sortText){
+        String query = "SELECT p.id, p.product_id, p.name, p.price, c.name category_name " +
+                "FROM products p INNER JOIN categories c ON p.category_id = c.id ";
+
+        if (sortText.equals("idUpp")) {
+            query += "ORDER BY p.product_id ASC";
+        } else if (sortText.equals("idDown")) {
+            query += "ORDER BY p.product_id DESC";
+        } else if (sortText.equals("categoryUpp")) {
+            query += "ORDER BY p.category_id ASC";
+        } else if (sortText.equals("categoryDown")) {
+            query += "ORDER BY p.category_id DESC";
+        } else if (sortText.equals("priceUpp")) {
+            query += "ORDER BY p.price ASC";
+        } else if (sortText.equals("priceDown")) {
+            query += "ORDER BY p.price DESC";
+        } else {
+            query += "ORDER BY p.product_id ASC";
+        }
+
+        return jdbcTemplate.query(query, new DataClassRowMapper<>(ListRecord.class));
+
     }
 
     /**

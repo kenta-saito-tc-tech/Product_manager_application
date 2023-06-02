@@ -63,4 +63,11 @@ public class PgProductService implements ProductService{
     public int delete(int id) {
         return productDao.delete(id);
     }
+
+    @Override
+    public List<ListRecord> productSort(String sortText) {
+        return productDao.productSort(sortText);
+    }
+
+
 }

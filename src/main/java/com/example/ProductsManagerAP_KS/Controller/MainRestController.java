@@ -110,15 +110,26 @@ public class MainRestController {
     @PostMapping("/insertProduct")
     public ResponseEntity<String> insertProduct(@RequestBody ProductRecord productRecord) {
         try {
-            int count = productService.insertProduct(productRecord);
-            if (count == 1) {
-                return new ResponseEntity<>("POST request processed", HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>("POST request failed", HttpStatus.BAD_REQUEST);
-            }
-        } catch (Exception e) {
+         ProductRecord pr = productService.findById(productRecord.productId());
+         if (pr == null){
+             try {
+                 int count = productService.insertProduct(productRecord);
+                 if (count == 1) {
+                     return new ResponseEntity<>("POST request processed", HttpStatus.OK);
+                 } else {
+                     return new ResponseEntity<>("POST request failed", HttpStatus.BAD_REQUEST);
+                 }
+             } catch (Exception e) {
+                 e.printStackTrace();
+                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST); //ステータスコード400番
+             }
+         }else {
+             return new ResponseEntity<>("product_id exists", HttpStatus.BAD_REQUEST);
+         }
+
+        }catch (Exception e){
             e.printStackTrace();
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST); //ステータスコード400番
+            return new ResponseEntity<>("POST request failed", HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -153,6 +164,22 @@ public class MainRestController {
     }
 
     /**
+     * productの並び順変更
+     * @param
+     * @return
+     */
+    @GetMapping("/productSort")
+    public List<ListRecord> productSort(@RequestParam(name = "changeMenu") String sortText){
+        try {
+            var pr = productService.productSort(sortText);
+            return pr; //ステータスコード200番
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST); //ステータスコード400番
+        }
+    }
+
+    /**
      * productの詳細ページ用データ取得用
      * @param id
      * @return
@@ -176,13 +203,22 @@ public class MainRestController {
     @PutMapping("/updateProduct")
     public ResponseEntity<String> updateProduct(@RequestBody ProductRecord productRecord){
         try {
-            int count = productService.update(productRecord);
-            if (count == 1) {
-                return new ResponseEntity<>("PUT request processed", HttpStatus.OK);
+            ProductRecord pr = productService.findById(productRecord.productId());
+            if (pr == null || productRecord.id() == pr.id()){
+                try {
+                    int count = productService.update(productRecord);
+                    if (count == 1) {
+                        return new ResponseEntity<>("PUT request processed", HttpStatus.OK);
+                    }else {
+                        return new ResponseEntity<>("PUT request failed", HttpStatus.BAD_REQUEST);
+                    }
+                } catch (Exception e) {
+                    throw new ResponseStatusException(HttpStatus.BAD_REQUEST); //ステータスコード400番
+                }
             }else {
-                return new ResponseEntity<>("PUT request failed", HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<>("product_id exists", HttpStatus.BAD_REQUEST);
             }
-        } catch (Exception e) {
+        }catch (Exception e){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST); //ステータスコード400番
         }
     }

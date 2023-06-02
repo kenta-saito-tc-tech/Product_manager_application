@@ -220,6 +220,7 @@ document.addEventListener("DOMContentLoaded", () => {
             window.location.href = "/backToList"; //ControllerのGetに指示を出す
           } else {
             console.error("POST request failed");
+            errarId.style.display = "block";
           }
         })
         .catch((error) => {

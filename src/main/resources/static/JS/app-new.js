@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const errarDescription = document.getElementById("js-errarDescription");
   const errarImage = document.getElementById("js-errarImage");
 
+
   //エラーメッセージ非表示
   errarId.style.display = "none";
   errarName.style.display = "none";
@@ -52,25 +53,25 @@ document.addEventListener("DOMContentLoaded", () => {
     //判別用FLAG
     let flg = 0;
 
-    if (isNaN(idText) || idText === null || idText === "") {
+    if (isNaN(idText) || idText == null || idText == "" || idText == 0) {
       errarId.style.display = "block";
       flg = 1;
     } else {
       errarId.style.display = "none";
     }
-    if (isNaN(priceText) || priceText === null || priceText === "") {
+    if (isNaN(priceText) || priceText == null || priceText == "" || priceText == 0) {
       errarPrice.style.display = "block";
       flg = 1;
     } else {
       errarPrice.style.display = "none";
     }
-    if (nameText === null || nameText === "") {
+    if (nameText == null || nameText == "") {
       errarName.style.display = "block";
       flg = 1;
     } else {
       errarName.style.display = "none";
     }
-    if (categoryText === null || categoryText === "") {
+    if (categoryText == null || categoryText == "") {
       errarCategory.style.display = "block";
       flg = 1;
     } else {
@@ -107,6 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
             window.location.href = "/backToList"; //ControllerのGetに指示を出す
           } else {
             console.error("POST request failed");
+            errarId.style.display = "block";
           }
         })
         .catch((error) => {
