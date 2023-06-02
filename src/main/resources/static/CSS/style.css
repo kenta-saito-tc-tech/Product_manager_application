@@ -1,0 +1,29 @@
+.loginForm{
+    text-align: center;
+    background-color: white;
+    width: 300px;
+    height: auto;
+    line-height: 3;
+    margin: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+}
+body{
+    background-color:rgb(223, 223, 223);
+}
+.inputLog{
+    border-radius: 8px;
+    padding-left: 2%;
+}
+.logButton{
+    border-radius: 10px;
+}
+.logImage{
+    width: 150px;
+    height: auto;
+    padding-bottom: 30px;
+}
+.errar{
+    color: red;
+}

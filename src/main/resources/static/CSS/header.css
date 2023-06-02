@@ -1,0 +1,41 @@
+/* 
+header
+*/
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px;
+    border-bottom: 1px solid black;
+}
+
+/* .header-nav {} */
+.header-navlist {
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;;
+}
+
+.header-navitem > a:hover {
+    border-bottom: 2px solid #333;
+}
+.header-button{
+    background-color: rgb(185, 218, 243);
+    padding: 5px;
+    border-radius: 5px;
+    margin-left: 10px;
+    text-decoration: none
+}
+
+.header-img{
+    width: 10px;
+    height: auto;
+}
+
+@media screen and (max-width: 768px){
+    .header {
+        font-size: 12px;
+    }
+}

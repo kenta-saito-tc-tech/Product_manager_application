@@ -1,0 +1,33 @@
+.tableView{
+    border-collapse: collapse;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tableView > tbody, td, tr, th, input {
+    border: 1px solid black; /* セルのボーダーを設定 */
+    padding: 2px; /* セルの余白を指定 */
+  }
+
+  .tableView > td, th, input{
+    width: 200px; /* 横幅を200pxに設定 */
+  }
+  thead{
+    background-color: wheat;
+  }
+
+  .changeBtn:hover{
+    border-bottom: 2px solid #333;
+}
+
+.button{
+    color: #333;
+    background-color: antiquewhite;
+    text-decoration: none;
+  }
+
+  .button:hover{
+    border-bottom: 2px solid #333;
+}

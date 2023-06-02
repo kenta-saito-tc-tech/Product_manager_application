@@ -1,0 +1,67 @@
+.redText{
+    color: red;
+}
+
+.inputEach{
+    vertical-align: middle;
+}
+
+.insert-body {
+    width: 70%;
+    margin: auto;
+  }
+  
+  .inputText {
+      border: 1px solid rgba(0, 0, 0, 0.16);
+      font-family: inherit;
+      font-size: 13px;
+      padding: 0.4em 0.8em;
+      width: 50%;
+      margin: 4px;
+  }
+  
+  .inputText:focus {
+      border: 1px solid rgba(0, 0, 0, 0.32);
+      box-shadow: none;
+      outline: none;
+  }
+  
+  textarea {
+    resize: none;
+    width: 300px;
+    height: 100px;
+  }
+
+  .inputEach label {
+    display: inline-block;
+    width: 100px;
+    text-align: right;
+    margin-right: 10px;
+    margin-bottom: 5px;
+  }
+  
+  .inputEach input,
+  .inputEach textarea,
+  .inputEach select {
+    display: inline-block;
+    width: 300px;
+  }
+
+  .inputEach textarea {
+    vertical-align: top;
+  }
+
+  fieldset {
+    border: none;
+  }
+
+  .button{
+    color: #333;
+    background-color: antiquewhite;
+    text-decoration: none;
+  }
+
+  .button:hover{
+    border-bottom: 2px solid #333;
+}
+
