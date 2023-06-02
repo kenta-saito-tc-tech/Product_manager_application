@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
   firstNone5.style.display = "none";
   updateBtn.style.display = "none";
 
-  if(role == 2){
+  if (role == 2) {
     changeBtn.style.display = "none";
     deleteBtn.style.display = "none";
   }
@@ -90,7 +90,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
-
 
   //編集ボタンクリック時処理
   changeBtn.addEventListener("click", function () {
@@ -151,6 +150,10 @@ document.addEventListener("DOMContentLoaded", () => {
         if (response.ok) {
           console.log("DELETE request processed");
           window.location.href = "/backToList"; //ControllerのGetに指示を出す
+          // 画面推移後にポップアップを表示
+          window.setTimeout(function () {
+            alert("削除が完了しました");
+          }, 1000);
         } else {
           console.error("DELETE request failed");
         }
@@ -217,7 +220,11 @@ document.addEventListener("DOMContentLoaded", () => {
         .then((response) => {
           if (response.ok) {
             console.log("POST request processed");
-            window.location.href = "/backToList"; //ControllerのGetに指示を出す
+            window.location.href = "/backToList";
+            // 画面推移後にポップアップを表示
+            window.setTimeout(function () {
+              alert("更新が完了しました");
+            }, 1000);
           } else {
             console.error("POST request failed");
             errarId.style.display = "block";
@@ -230,10 +237,4 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   productDetailShow();
-
-
-
-  //todo
-  // 値をinputに格納し、変更不可にする
-  // 編集ボタンをおし、変更可能にして必要なメッセージを表示、必要ないボタン等は非表示
 });

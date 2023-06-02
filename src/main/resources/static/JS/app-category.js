@@ -100,7 +100,12 @@ document.addEventListener("DOMContentLoaded", () => {
   //削除ボタンクリック時処理
   deleteBtn.addEventListener("click", function () {
     console.log("click");
-    const deleteData = { id: checkedData.id, name: checkedData.name, createdAt: checkedData.createdAt, updatedAt: checkedData.updatedAt };
+    const deleteData = {
+      id: checkedData.id,
+      name: checkedData.name,
+      createdAt: checkedData.createdAt,
+      updatedAt: checkedData.updatedAt,
+    };
     console.log(deleteData);
 
     fetch("/categoryDelete", {
@@ -114,6 +119,10 @@ document.addEventListener("DOMContentLoaded", () => {
         if (response.ok) {
           console.log("DELETE request processed");
           listCategoryShow();
+          // ポップアップを表示
+          window.setTimeout(function () {
+            alert("削除が完了しました");
+          }, 1000);
         } else {
           console.error("DELETE request failed");
         }
@@ -147,6 +156,10 @@ document.addEventListener("DOMContentLoaded", () => {
         if (response.ok) {
           console.log("PUT request processed");
           listCategoryShow();
+          // ポップアップを表示
+          window.setTimeout(function () {
+            alert("更新が完了しました");
+          }, 1000);
         } else {
           console.error("PUT request failed");
         }

@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const listCounts = document.getElementById("js-listCounts");
 
   const searchBtn = document.getElementById("js-searchBtn");
+  
 
   //並び替えデータ
   const changeView = {
@@ -26,9 +27,12 @@ document.addEventListener("DOMContentLoaded", () => {
     var selectedIndex = listSelect.selectedIndex;
     var selectedOption = listSelect.options[selectedIndex];
     var selectedValue = selectedOption.value;
+
+    const keyWord = document.getElementById("js-searchText").value;
     console.log(selectedValue);
+    console.log(keyWord);
     //並び替えの情報を渡す
-    fetch(`/productSort?changeMenu=${selectedValue}`).then((res) => {
+    fetch(`/productSort?changeMenu=${selectedValue}&keyword=${keyWord}`).then((res) => {
       //RestControllerから受け取った値->res(成功/200 失敗/400)
       if (res.status === 400) {
         console.log("no");

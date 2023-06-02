@@ -65,8 +65,8 @@ public class PgProductService implements ProductService{
     }
 
     @Override
-    public List<ListRecord> productSort(String sortText) {
-        return productDao.productSort(sortText);
+    public List<ListRecord> productSort(String sortText, String keyword) {
+        return productDao.productSort(sortText, keyword);
     }
 
 

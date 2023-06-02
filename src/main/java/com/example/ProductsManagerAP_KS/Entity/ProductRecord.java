@@ -1,5 +1,7 @@
 package com.example.ProductsManagerAP_KS.Entity;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import java.sql.Timestamp;
 
 public record ProductRecord(

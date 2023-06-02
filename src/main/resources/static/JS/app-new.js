@@ -16,7 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const errarDescription = document.getElementById("js-errarDescription");
   const errarImage = document.getElementById("js-errarImage");
 
-
   //エラーメッセージ非表示
   errarId.style.display = "none";
   errarName.style.display = "none";
@@ -59,7 +58,12 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       errarId.style.display = "none";
     }
-    if (isNaN(priceText) || priceText == null || priceText == "" || priceText == 0) {
+    if (
+      isNaN(priceText) ||
+      priceText == null ||
+      priceText == "" ||
+      priceText == 0
+    ) {
       errarPrice.style.display = "block";
       flg = 1;
     } else {
@@ -106,6 +110,10 @@ document.addEventListener("DOMContentLoaded", () => {
           if (response.ok) {
             console.log("POST request processed");
             window.location.href = "/backToList"; //ControllerのGetに指示を出す
+            // 画面推移後にポップアップを表示
+            window.setTimeout(function () {
+              alert("追加が完了しました");
+            }, 1000);
           } else {
             console.error("POST request failed");
             errarId.style.display = "block";

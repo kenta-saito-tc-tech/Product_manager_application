@@ -169,9 +169,9 @@ public class MainRestController {
      * @return
      */
     @GetMapping("/productSort")
-    public List<ListRecord> productSort(@RequestParam(name = "changeMenu") String sortText){
+    public List<ListRecord> productSort(@RequestParam(name = "changeMenu") String sortText, @RequestParam(name = "keyword") String keyword){
         try {
-            var pr = productService.productSort(sortText);
+            var pr = productService.productSort(sortText, keyword);
             return pr; //ステータスコード200番
         } catch (Exception e) {
             e.printStackTrace();

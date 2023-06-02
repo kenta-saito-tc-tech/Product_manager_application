@@ -17,5 +17,5 @@ public interface ProductService {
     public int update(ProductRecord productRecord);
     public int delete(int id);
 
-    public List<ListRecord> productSort(String sortText);
+    public List<ListRecord> productSort(String sortText, String keyword);
 }

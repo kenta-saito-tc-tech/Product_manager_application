@@ -22,6 +22,10 @@ document.addEventListener("DOMContentLoaded", () => {
           if (response.ok) {
             console.log("LOGIN request processed");
             window.location.href = "/change-page"; //ControllerのGetに指示を出す
+            // 画面推移後にポップアップを表示
+            window.setTimeout(function () {
+              alert("ログインに成功しました");
+            }, 1000);
           } else {
             console.error("LOGIN request failed");
             console.log(data);

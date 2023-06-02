@@ -7,6 +7,9 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 @Repository
 public class PgProductDao implements ProductDao{
@@ -92,7 +95,7 @@ public class PgProductDao implements ProductDao{
      * @return
      */
     @Override
-    public int insertProduct(ProductRecord productRecord) {
+    public int insertProduct(ProductRecord productRecord){
         MapSqlParameterSource param = new MapSqlParameterSource();
         param.addValue("productId", productRecord.productId());
         param.addValue("categoryId", productRecord.categoryId());
@@ -120,29 +123,43 @@ public class PgProductDao implements ProductDao{
      * ,並び替え用のmenuのlistの表示用データ取得
      * @return
      */
-    public List<ListRecord> productSort(String sortText){
-        String query = "SELECT p.id, p.product_id, p.name, p.price, c.name category_name " +
-                "FROM products p INNER JOIN categories c ON p.category_id = c.id ";
+    public List<ListRecord> productSort(String sortText, String keyword) {
+        StringBuilder queryBuilder = new StringBuilder();
+        queryBuilder.append("SELECT p.id, p.product_id, p.name, p.price, c.name category_name ")
+                .append("FROM products p INNER JOIN categories c ON p.category_id = c.id ");
 
-        if (sortText.equals("idUpp")) {
-            query += "ORDER BY p.product_id ASC";
-        } else if (sortText.equals("idDown")) {
-            query += "ORDER BY p.product_id DESC";
-        } else if (sortText.equals("categoryUpp")) {
-            query += "ORDER BY p.category_id ASC";
-        } else if (sortText.equals("categoryDown")) {
-            query += "ORDER BY p.category_id DESC";
-        } else if (sortText.equals("priceUpp")) {
-            query += "ORDER BY p.price ASC";
-        } else if (sortText.equals("priceDown")) {
-            query += "ORDER BY p.price DESC";
-        } else {
-            query += "ORDER BY p.product_id ASC";
+        if (!keyword.isEmpty()) {
+            queryBuilder.append("WHERE ");
+            String[] keywordArray = keyword.split(" ");
+            for (int i = 0; i < keywordArray.length; i++) {
+                if (i > 0) {
+                    queryBuilder.append("AND ");
+                }
+                queryBuilder.append("(p.name LIKE '%" + keywordArray[i] + "%' OR ")
+                        .append("c.name LIKE '%" + keywordArray[i] + "%') ");
+            }
         }
 
-        return jdbcTemplate.query(query, new DataClassRowMapper<>(ListRecord.class));
+        if (sortText.equals("idUpp")) {
+            queryBuilder.append("ORDER BY p.product_id ASC");
+        } else if (sortText.equals("idDown")) {
+            queryBuilder.append("ORDER BY p.product_id DESC");
+        } else if (sortText.equals("categoryUpp")) {
+            queryBuilder.append("ORDER BY p.category_id ASC");
+        } else if (sortText.equals("categoryDown")) {
+            queryBuilder.append("ORDER BY p.category_id DESC");
+        } else if (sortText.equals("priceUpp")) {
+            queryBuilder.append("ORDER BY p.price ASC");
+        } else if (sortText.equals("priceDown")) {
+            queryBuilder.append("ORDER BY p.price DESC");
+        } else {
+            queryBuilder.append("ORDER BY p.product_id ASC");
+        }
 
+        String query = queryBuilder.toString();
+        return jdbcTemplate.query(query, new DataClassRowMapper<>(ListRecord.class));
     }
+
 
     /**
      * productIdから情報取得用
