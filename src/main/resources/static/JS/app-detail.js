@@ -156,10 +156,18 @@ document.addEventListener("DOMContentLoaded", () => {
           }, 1000);
         } else {
           console.error("DELETE request failed");
+          // ポップアップを表示
+          window.setTimeout(function () {
+            alert("追加時にエラーが発生しました");
+          }, 1000);
         }
       })
       .catch((error) => {
         console.error("Error:", error);
+        // ポップアップを表示
+        window.setTimeout(function () {
+          alert("追加時にエラーが発生しました");
+        }, 1000);
       });
   });
 
@@ -228,10 +236,18 @@ document.addEventListener("DOMContentLoaded", () => {
           } else {
             console.error("POST request failed");
             errarId.style.display = "block";
+            // ポップアップを表示
+            window.setTimeout(function () {
+              alert("更新時にエラーが発生しました");
+            }, 1000);
           }
         })
         .catch((error) => {
           console.error("Error:", error);
+          // ポップアップを表示
+          window.setTimeout(function () {
+            alert("更新時にエラーが発生しました");
+          }, 1000);
         });
     }
   });

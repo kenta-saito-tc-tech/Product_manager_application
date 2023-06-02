@@ -117,6 +117,10 @@ document.addEventListener("DOMContentLoaded", () => {
           } else {
             console.error("POST request failed");
             errarId.style.display = "block";
+            // ポップアップを表示
+            window.setTimeout(function () {
+              alert("追加時にエラーが発生しました");
+            }, 1000);
           }
         })
         .catch((error) => {
