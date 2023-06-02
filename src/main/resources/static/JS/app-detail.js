@@ -91,7 +91,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  productDetailShow();
 
   //編集ボタンクリック時処理
   changeBtn.addEventListener("click", function () {
@@ -228,6 +227,8 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
   });
+
+  productDetailShow();
 
 
 
