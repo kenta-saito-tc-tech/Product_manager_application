@@ -88,7 +88,7 @@ public class MainController {
             if(user.role() == 2){ //管理者以外入れなくする場合
                 return "redirect:/index";
             }
-            return "/category-list";
+            return "/new-product-list";
         }
     }
 
